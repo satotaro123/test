@@ -74,9 +74,10 @@ public class Main {
 
 		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-			auth
+			/*auth
 			.inMemoryAuthentication()
 			.withUser("user").password("pass").roles("USER");
+			*/
 		}
 
 	}
