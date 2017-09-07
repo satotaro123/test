@@ -74,9 +74,17 @@ public class Main {
 
 		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-			auth
-			.inMemoryAuthentication()
-			.withUser("user").password("pass").roles("USER");
+			//auth
+			//.inMemoryAuthentication()
+			//.withUser("user").password("pass").roles("USER");
+			try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT custid,password FROM userdata");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add(rs.getString("custid") + "　/　" + rs.getString("password"));
+			}
 		}
 
 	}
