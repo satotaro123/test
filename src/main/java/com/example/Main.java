@@ -77,6 +77,7 @@ public class Main {
 			auth
 			.inMemoryAuthentication()
 			.withUser("user").password("pass").roles("USER");
+			String sql = "SELECT custid,password FROM userdata";
 		}
 
 	}
