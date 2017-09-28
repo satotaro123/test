@@ -84,29 +84,6 @@ public class Main {
 		}
 
 		@Autowired
-		@Qualifier("HikariDataSource")
-		private DataSource dataSource;
-
-		private static final String USER_QUERY
-		="select CUSTID, PASSWORD, true"
-				+"from userdata"
-				+"where CUSTID = ?";
-
-		private static final String ROLE_QUERY
-		="select CUSTID, ROLE, true"
-				+"from userdata"
-				+"where CUSTID = ?";
-
-		@Override
-		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.jdbcAuthentication()
-			.dataSource(dataSource)
-			.usersByUsernameQuery(USER_QUERY)
-			.authoritiesByUsernameQuery(ROLE_QUERY);
-		}
-
-
-		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 			auth
 			.inMemoryAuthentication()
