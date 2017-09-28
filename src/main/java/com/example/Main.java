@@ -69,9 +69,9 @@ public class Main {
 		protected void configure(HttpSecurity http) throws Exception {
 			http
 			.authorizeRequests()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/Home/**").hasAnyRole("USER","ADMIN")
-			.antMatchers("/index/**").hasRole("ADMIN")
+			.antMatchers("/", "/login").permitAll()
+			.antMatchers("/**").hasAnyRole("USER","ADMIN")
+			.antMatchers("/Account/**").hasRole("ADMIN")
 			.and()
 			.formLogin()
 			.loginPage("/login");
@@ -80,10 +80,7 @@ public class Main {
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/")
 			.deleteCookies("JSESSIONID")
-			.invalidateHttpSession(true).permitAll()
-			.and()
-			.csrf()
-			.disable();
+			.invalidateHttpSession(true).permitAll();
 		}
 
 		@Autowired
