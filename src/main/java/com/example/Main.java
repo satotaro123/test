@@ -82,15 +82,36 @@ public class Main {
 			.deleteCookies("JSESSIONID")
 			.invalidateHttpSession(true).permitAll();
 		}
+//
+		@Autowired
+		@Qualifier("DataSource")
+		private DataSource dataSource;
+
+		private static final String USER_QUERY
+		="select CUSTID, PASSWORD, true"
+				+"from userdata"
+				+"where CUSTID = ?";
+
+		private static final String ROLE_QUERY
+		="select CUSTID, ROLE, true"
+				+"from userdata"
+				+"where CUSTID = ?";
+
+		@Override
+		public void configure(AuthenticationManagerBuilder auth) throws Exception {
+			auth.jdbcAuthentication()
+			.dataSource(dataSource)
+			.usersByUsernameQuery(USER_QUERY)
+			.authoritiesByUsernameQuery(ROLE_QUERY);
+		}
+//
 
 		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 			auth
 			.inMemoryAuthentication()
-			.withUser("user").password("pass").roles("USER");
-			/*.and()
+			.withUser("user").password("pass").roles("USER").and()
 			.withUser("admin").password("pass").roles("ADMIN");
-			*/
 		}
 
 	}
@@ -151,11 +172,6 @@ public class Main {
 	@RequestMapping("/Account")
 	String Account() {
 		return "Account";
-	}
-
-	@RequestMapping("/logview")
-	String logview() {
-		return "logview";
 	}
 	/*
 	String Account(Map<String, Object> model) {
