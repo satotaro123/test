@@ -84,8 +84,8 @@ public class Main {
 		}
 //
 		@Autowired
-		@Qualifier("DataSource")
-		private DataSource dataSource;
+		@Qualifier("dataSource")
+		private dataSource dataSource;
 
 		private static final String USER_QUERY
 		="select CUSTID, PASSWORD, true"
