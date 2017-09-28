@@ -68,10 +68,11 @@ public class Main {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
+			http
 			.authorizeRequests()
-			.antMatchers("/", "/login").permitAll()
-			.antMatchers("/**").hasAnyRole("USER","ADMIN")
-			.antMatchers("/Account/**").hasRole("ADMIN")
+			.antMatchers("/login/**").permitAll()
+			.antMatchers("/Home/**").hasAnyRole("USER","ADMIN")
+			.antMatchers("/index/**").hasRole("ADMIN")
 			.and()
 			.formLogin()
 			.loginPage("/login");
@@ -80,7 +81,10 @@ public class Main {
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/")
 			.deleteCookies("JSESSIONID")
-			.invalidateHttpSession(true).permitAll();
+			.invalidateHttpSession(true).permitAll()
+			.and()
+			.csrf()
+			.disable();
 		}
 
 		@Autowired
@@ -128,7 +132,7 @@ public class Main {
 
 
 
-
+/*
 	@RequestMapping("/db")
 	String db(Map<String, Object> model) {
 		try (Connection connection = dataSource.getConnection()) {
@@ -147,7 +151,7 @@ public class Main {
 			return "error";
 		}
 	}
-
+*/
 	@RequestMapping("/Account")
 	String Account() {
 		return "Account";
