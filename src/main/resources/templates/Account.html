@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/layout : base_header(~{::link},'チャットボットログ')">
+<head
+	th:replace="~{fragments/layout : base_header(~{::link},'チャットボットログ')">
 
 <meta charset="utf-8">
 <meta name="description" content="アカウント情報を表示します。">
@@ -23,6 +24,9 @@
 
 </head>
 <body>
+
+	<div th:replace="fragments/layout :: header"></div>
+
 	<script type="text/javascript">
 
 	</script>
