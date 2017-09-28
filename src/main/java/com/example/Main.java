@@ -68,7 +68,6 @@ public class Main {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-			http
 			.authorizeRequests()
 			.antMatchers("/login/**").permitAll()
 			.antMatchers("/Home/**").hasAnyRole("USER","ADMIN")
