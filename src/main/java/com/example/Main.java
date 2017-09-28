@@ -69,7 +69,7 @@ public class Main {
 		protected void configure(HttpSecurity http) throws Exception {
 			http
 			.authorizeRequests()
-			.antMatchers("/login/**").permitAll()
+			.antMatchers("/login").permitAll()
 			.antMatchers("/Home/**").hasAnyRole("USER","ADMIN")
 			.antMatchers("/index/**").hasRole("ADMIN")
 			.and()
