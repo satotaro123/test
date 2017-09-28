@@ -1,14 +1,21 @@
 <!doctype html>
-<html th:fragment="layout (template, menu)">
-<head>
-<title>ViewLog</title>
-<link rel="stylesheet" type="text/css"
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="base_header(links, title)">
+<title th:text="${title==null}?'ViewLog' : ${title}+' - ViewLog'">ViewLog</title>
+	<link rel="stylesheet" type="text/css"
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+	<link href="/stylesheets/common.css" rel="stylesheet" />
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+	<th:block th:replace="${links}" />
+
 </head>
 
-<body>
-	<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+	<nav class="navbar navbar-default navbar-static-top navbar-inverse" th:fragment="header">
 		<div class="container">
 			<ul class="nav navbar-nav">
 				<li class="active">
@@ -25,9 +32,4 @@
 			</ul>
 		</div>
 	</nav>
-	<div th:replace="${template}" />
-
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</body>
+</html>

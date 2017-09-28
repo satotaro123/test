@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'Home')}">
-<head>
-<meta charset="UTF-8">
-	<title>home</title>
-	<link rel="stylesheet" type="text/css"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: base_header(~{::link},'login')">
+  <link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
 </head>
 <body>
+		<div th:replace="fragments/layout :: header"></div>
 		<div align="center">
-			<input type="button" value="ViewLog" onclick="location.href='/db'"
+			<input type="button" value="ViewLog" onclick="location.href='/logview'"
 				style="margin-top: 30px; class: glyphicon glyphicon-list; margin-right: 10px; text-align: center; width: 400px; height: 70px; border-radius: 0.5em; background-color: #778899; font-size: 30px; font-color: black;">
 			<input type="button" value="(●●●●●●)" onclick="location.href='/Account'"
 				style="margin-top: 30px; margin-left: 10px; text-align: center; width: 400px; height: 70px; border-radius: 0.5em; background-color: #4682b4; font-size: 30px;">
-			<input type="button" value="アカウント登録" onclick="location.href='/Signup'">
+			<input type="button" value="アカウント登録" onclick="location.href='/signup'">
 		</div>
 		<br>
 

@@ -152,6 +152,11 @@ public class Main {
 	String Account() {
 		return "Account";
 	}
+
+	@RequestMapping("/logview")
+	String logview() {
+		return "logview";
+	}
 	/*
 	String Account(Map<String, Object> model) {
 		try (Connection connection = dataSource.getConnection()) {

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="layout :: base_header(~{::link},'index')">
+</head>
 
 <body>
-
+<div th:replace="layout :: header"></div>
 <div class="jumbotron text-center">
   <div class="container">
     <a href="/" class="lang-logo">
