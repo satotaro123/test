@@ -41,6 +41,12 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 	}
 
+    @Secured("ADMIN")
+    @RequestMapping("/layout.html")
+    public ModelAndView forms() {
+        return "login";
+    }
+
 	@RequestMapping({"/","/login"})
 	String login() {
 		return "login";
