@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 	private static final String USER_QUERY = "SELECT custid, password,role FROM userdata WHERE custid = ?";
-	private static final String ROLE_QUERY = "SELECT CUSTID, reserve FROM userdata WHERE CUSTID=?";
+	private static final String ROLE_QUERY = "SELECT custid, reserve FROM userdata WHERE custid = ?";
 
 
 	@Override
