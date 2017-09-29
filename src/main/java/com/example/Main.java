@@ -36,14 +36,14 @@ import java.util.Map;
 @Controller
 @SpringBootApplication
 public class Main {
-/*
+	/*
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 
 	@Autowired
 	private DataSource dataSource;
 	//private UserRepository userRepository;
-*/
+	 */
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Main.class, args);
 	}
@@ -54,7 +54,7 @@ public class Main {
 	}
 
 
-/*
+	/*
 	@EnableWebSecurity
 	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -85,7 +85,7 @@ public class Main {
 		}
 
 	}
-*/
+	 */
 	@RequestMapping("/Home")
 	String Home() {
 		return "Home";
@@ -119,7 +119,7 @@ public class Main {
 
 
 
-/*
+	/*
 	@RequestMapping("/db")
 	String db(Map<String, Object> model) {
 		try (Connection connection = dataSource.getConnection()) {
@@ -138,7 +138,7 @@ public class Main {
 			return "error";
 		}
 	}
-*/
+	 */
 	@RequestMapping("/Account")
 	String Account() {
 		return "Account";
@@ -172,5 +172,5 @@ public class Main {
 			return new HikariDataSource(config);
 		}
 	}
-*/
+	 */
 }
