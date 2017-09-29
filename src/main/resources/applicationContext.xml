@@ -1,3 +1,4 @@
+<!--
 <bean id="dataSource" class="org.apach.commons.dbcp.BasicDataSource"
 destroy-method="close">
 <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -12,3 +13,4 @@ destroy-method="close">
 <bean class="org.springframework.jdbc.core.JdbcTemplate">
     <constructor-arg ref="dataSource" />
 </bean>
+-->
