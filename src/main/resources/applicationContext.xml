@@ -1,16 +1,8 @@
-<!--
-<bean id="dataSource" class="org.apach.commons.dbcp.BasicDataSource"
-destroy-method="close">
-<property name="driverClassName" value="${jdbc.driverClassName}"/>
-<property name="url" value="${jdbc.url}"/>
-<property name="username" value="${jdbc.username}"/>
-<property name="password" value="${jdbc.password}"/>
-<property name="maxActive" value="${jdbc.maxPoolSide}"/>
-</bean>
 
-<context:property-placeholder location="classpath:jdbc.properties"/>
-
-<bean class="org.springframework.jdbc.core.JdbcTemplate">
-    <constructor-arg ref="dataSource" />
-</bean>
--->
+<div>
+	<sec:authorize access="hasAuthority('ADMIN')">
+		<li>
+			<a href="/index">ラスカル</a>
+		</li>
+	</sec:authorize>
+</div>
