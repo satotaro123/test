@@ -40,13 +40,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Main.class, args);
 	}
-/*
-    @Secured("ADMIN")
-    @RequestMapping("/layout.html")
-    public ModelAndView forms() {
-        return "login";
-    }
-*/
+
 	@RequestMapping({"/","/login"})
 	String login() {
 		return "login";
