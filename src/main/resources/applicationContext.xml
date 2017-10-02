@@ -1,4 +1,4 @@
-
+<!--
 <div>
 	<sec:authorize access="hasAuthority('ADMIN')">
 		<li>
@@ -6,3 +6,4 @@
 		</li>
 	</sec:authorize>
 </div>
+-->
