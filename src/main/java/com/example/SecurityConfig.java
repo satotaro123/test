@@ -87,14 +87,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.disable();
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-		.inMemoryAuthentication()
-		.withUser("user").password("pass").roles("USER").and()
-		.withUser("admin").password("pass").roles("ADMIN");
-	}
-
 	@Bean
 	public DataSource dataSource() throws SQLException {
 		if (dbUrl == null || dbUrl.isEmpty()) {
