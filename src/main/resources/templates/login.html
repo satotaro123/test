@@ -12,7 +12,7 @@
                 <div class="form-wrap">
                     <div class="text-center"><h1>Login</h1></div>
                     <br/>
-                    <form role="form" action="#" th:action="@{/login}" method="post" id="login-form" autocomplete="off">
+                    <form role="form" action="#" th:action="@{/login}" method="post" id="login-form" autocomplete="off" style="text-align: center;">
                         <div class="form-group" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null">
                             <p class="form-control-static text-danger" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></p>
                         </div>
