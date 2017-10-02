@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout :: base_header(~{::link},'error')">
-  <link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
+<link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
 </head>
 
-  <body>
-    <p th:text="${message}">Exception message</p>
-  </body>
+<body>
+	<div th:replace="fragments/layout :: header"></div>
+	<p th:text="${message}">Exception message</p>
+</body>
 
 </html>
 
