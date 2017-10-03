@@ -3,24 +3,13 @@
 <head th:replace="fragments/layout :: base_header(~{::link},'login')">
 <link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
 </head>
-<style>
-title {
-    position: absolute;
-    margin-top: -240px; /* 中央配置する要素の横幅の半分だけ上にずらす */
-    margin-left: -240px; /* 中央配置する要素の縦幅の半分だけ左にずらす */
-    top: 50%;  /* 要素の上端を中央に */
-    left: 50%;  /* 要素の左端を中央に */
-    width: 580px;
-    height: 280px;
-  }
-  </style>
 <body>
-	<!-- <div th:replace="fragments/layout2 :: header"></div> -->
+	<div th:replace="fragments/layout2 :: header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-push-3 col-md-6">
 				<div class="form-wrap">
-					<div id="title">
+					<div class="text-center">
 						<h1>Login</h1>
 					</div>
 					<br />
