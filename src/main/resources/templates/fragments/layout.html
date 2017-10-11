@@ -1,100 +1,64 @@
-package com.example;
+<!doctype html>
+ <html xmlns:th="http://www.thymeleaf.org">
+ <head th:fragment="base_header(links, title)">
+ <title th:text="${title==null}?'ViewLog' : ${title}+' - ViewLog'">ViewLog</title>
+ <link rel="stylesheet" type="text/css"
+ 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+ <link href="/stylesheets/common.css" rel="stylesheet" />
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+ <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+ <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+ <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Map;
+ <th:block th:replace="${links}" />
 
-@Controller
-@SpringBootApplication
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+ </head>
 
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
+ <nav class="navbar navbar-default navbar-static-top navbar-inverse"
+ 	th:fragment="header">
+ 	<div class="container">
+ 		<ul class="nav navbar-nav">
+ 			<li class="active"><a href="/Home"><span
+ 					class="glyphicon glyphicon-home"></span> Home</a></li>
+ 		</ul>
+ 		<ul class="nav navbar-nav navbar-right">
+ 			<li class="dropdown"><a href="#" class="dropdown-toggle"
+ 				data-toggle="dropdown" role="button" aria-expanded="false"><span
+ 					class="glyphicon glyphicon-th-large"></span> Menu<span
+ 					class="caret"></span></a>
+ 				<ul class="dropdown-menu" role="menu">
+ 					<li><a href="/Account"><span
+ 							class="glyphicon glyphicon-th-list"></span> Log 1</a></li>
+ 					<li><a href="/index"><span
+ 							class="glyphicon glyphicon-picture"></span> Log 2</a></li>
+ 					<li><a href="/logout"><span
+ 							class="glyphicon glyphicon-align-left"></span> Data</a></li>
+ 					<li id="visi"><a href="/Account"><span
+ 							class="glyphicon glyphicon-user"></span> Account</a></li>
+ 				</ul></li>
+ 			<li><a type="button" onclick="hyoji1(0)"> 表示</a></li>
+ 			<li><a type="button" onclick="hyoji1(1)"> 非表示</a></li>
+ 			<li class="active"><a href="/logout"><span
+ 					class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+ 		</ul>
+ 	</div>
+ </nav>
+ <script>
 
-	@Autowired
-	@Qualifier("dataSource")
-	private DataSource dataSource;
+ function hyoji1(num)
+  {
+    if (num == 0)
+    {
+     document.getElementById("visi").style.visibility="visible";
+    }
+    else
+    {
+     document.getElementById("visi").style.visibility="hidden";
+    }
+  }
 
-	private static final String USER_QUERY = "SELECT custid, password,role FROM userdata WHERE custid = ?";
-	private static final String ROLE_QUERY = "SELECT custid, reserve FROM userdata WHERE custid = ?";
+ </script>
 
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-		.dataSource(dataSource)
-		.usersByUsernameQuery(USER_QUERY)
-		.authoritiesByUsernameQuery(ROLE_QUERY);
-	}
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-		.authorizeRequests()
-		.antMatchers("/login").permitAll()
-		.antMatchers("/**").hasAnyAuthority("ADMIN","USER")
-		.antMatchers("/Home").hasAnyAuthority("ADMIN","USER")
-		.antMatchers("/Account").hasAuthority("ADMIN")
-		.antMatchers("/logout").hasAnyAuthority("ADMIN","USER")
-		//.antMatchers("/User/**").hasAuthority("ADMIN")
-		.and()
-		.formLogin()
-		.loginPage("/login");
-		http.formLogin()
-		.defaultSuccessUrl("/Home", true)
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/")
-		.deleteCookies("JSESSIONID")
-		.invalidateHttpSession(true).permitAll()
-		.and()
-		.csrf()
-		.disable();
-	}
-
-	@Bean
-	public DataSource dataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
-}
-
+ </body>
+ </html>
