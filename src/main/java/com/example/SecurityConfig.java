@@ -1,4 +1,3 @@
-
 package com.example;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -48,10 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("dataSource")
 	private DataSource dataSource;
 
-
 	private static final String USER_QUERY = "SELECT custid, password,role FROM userdata WHERE custid = ?";
 	private static final String ROLE_QUERY = "SELECT custid, reserve FROM userdata WHERE custid = ?";
-
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,14 +58,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authoritiesByUsernameQuery(ROLE_QUERY);
 	}
 
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
 		.antMatchers("/login").permitAll()
+		.antMatchers("/**").hasAnyAuthority("ADMIN","USER")
 		.antMatchers("/Home").hasAnyAuthority("ADMIN","USER")
-		.antMatchers("/Account/**").hasAuthority("ADMIN")
+		.antMatchers("/Account").hasAuthority("ADMIN")
+		.antMatchers("/logout").hasAnyAuthority("ADMIN","USER")
 		//.antMatchers("/User/**").hasAuthority("ADMIN")
 		.and()
 		.formLogin()
@@ -94,5 +92,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			return new HikariDataSource(config);
 		}
 	}
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}
 }
+
 
