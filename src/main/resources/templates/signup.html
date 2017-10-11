@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>sign up</title>
+<head th:replace="fragments/layout :: base_header(~{::link},'signup')">
+<link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
 </head>
 <body>
-    <form th:action="@{/signup}" method="post">
-    	<div><label>ID: <input type="text" name="custid"/> </label></div>
-        <div><label>ユーザ名: <input type="text" name="username"/> </label></div>
-        <div><label>組織名: <input type="text" name="orgname"/> </label></div>
-        <div><label>パスワード: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="登録"/></div>
-    </form>
+	<div th:replace="fragments/layout :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-push-3 col-md-6">
+				<div class="form-wrap">
+					<div class="text-center">
+						<h1>アカウント登録</h1>
+					</div>
+					<br />
+					<form role="form" action="#" th:action="@{/signup}" method="post"
+						id="signup" autocomplete="off">
+						<div class="form-group"
+							th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null">
+							<p class="form-control-static text-danger"
+								th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></p>
+						</div>
+						<div class="form-group">
+							<label for="id" class="sr-only">ID</label>ID <input type="text"
+								name="custid" id="custid" class="form-control"
+								/>
+						</div>
+						<div class="form-group">
+							<label for="id" class="sr-only">ユーザー名</label>ユーザー名 <input type="text"
+								name="username" id="username" class="form-control"
+								style="margin-top: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="id" class="sr-only">組織名</label>組織名 <input type="text"
+								name="username" id="username" class="form-control"
+								style="margin-top: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="password" class="sr-only">Password</label>Password <input
+								type="password" name="password" id="password"
+								class="form-control"
+								style="margin-top: 30px;" />
+						</div>
+
+						<br />
+						<button id="btn-signup" class="btn btn-primary btn-block">登録</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript">
+	<!--
+		$(document).ready(function() {
+			$('#id').focus();
+		});
+		-->
+	</script>
 </body>
 </html>
